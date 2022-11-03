@@ -24,12 +24,10 @@ namespace Cliente
                 int num_bytes_recvd;
                 string query = "", text_recvd = "";
 
-                while(true)
+                do
                 {
                     Console.Write("\n\n\nBuscar en Wikipedia: ");
                     query = Console.ReadLine();
-
-                    if (query == "exit") break;
 
                     bytes_to_send = Encoding.ASCII.GetBytes(query + "<EOF>");
                     sender.Send(bytes_to_send);
@@ -37,7 +35,7 @@ namespace Cliente
                     num_bytes_recvd = sender.Receive(bytes_recvd);
                     text_recvd = Encoding.UTF8.GetString(bytes_recvd, 0, num_bytes_recvd);
                     global::System.Console.WriteLine("\n\n\nServidor: \n\n" + text_recvd);
-                }
+                } while(query != "exit");
                 sender.Shutdown(SocketShutdown.Both);
                 sender.Close();
             }
