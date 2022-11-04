@@ -27,7 +27,7 @@ namespace Cliente
                 do
                 {
                     Console.Write("\n\n\nBuscar en Wikipedia: ");
-                    query = Console.ReadLine();
+                    query = Console.ReadLine() ?? "Unknown";
 
                     bytes_to_send = Encoding.ASCII.GetBytes(query + "<EOF>");
                     sender.Send(bytes_to_send);
